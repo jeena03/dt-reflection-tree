@@ -1,0 +1,337 @@
+{
+  "tree": {
+    "title": "Daily Reflection Tree",
+    "version": "1.0",
+    "description": "A deterministic end-of-day reflection tool that walks employees through three psychological axes: Locus of Control, Contribution vs Entitlement, and Radius of Concern.",
+    "axes": [
+      {
+        "id": "axis1",
+        "name": "Locus of Control",
+        "description": "Victim vs Victor — did you feel in control today, or did circumstances control you?",
+        "psychology": "Based on Julian Rotter (1954) Locus of Control and Carol Dweck (2006) Growth Mindset"
+      },
+      {
+        "id": "axis2",
+        "name": "Contribution vs Entitlement",
+        "description": "Did you focus on what you gave today, or what you were owed?",
+        "psychology": "Based on Campbell et al. (2004) Psychological Entitlement and Organ (1988) Organizational Citizenship Behavior"
+      },
+      {
+        "id": "axis3",
+        "name": "Radius of Concern",
+        "description": "Self-centric vs Altrocentric — was your attention on yourself or on others?",
+        "psychology": "Based on Maslow (1969) Self-Transcendence and Batson (2011) Perspective-Taking"
+      }
+    ]
+  },
+
+  "nodes": [
+
+    {
+      "id": "START",
+      "type": "start",
+      "text": "Good evening. Let's take a few minutes to look at your day honestly. No right or wrong answers — just reflection.",
+      "next": "A1_Q1"
+    },
+
+    {
+      "id": "A1_Q1",
+      "type": "question",
+      "axis": "axis1",
+      "text": "How would you describe your day today?",
+      "options": [
+        { "label": "Productive", "next": "A1_Q2_PRODUCTIVE", "signal": "axis1:internal" },
+        { "label": "Smooth and satisfying", "next": "A1_Q2_SMOOTH", "signal": "axis1:internal" },
+        { "label": "Tough and frustrating", "next": "A1_Q2_TOUGH", "signal": "axis1:external" },
+        { "label": "Mixed", "next": "A1_Q2_MIXED", "signal": "axis1:external" }
+      ]
+    },
+
+    {
+      "id": "A1_Q2_PRODUCTIVE",
+      "type": "question",
+      "axis": "axis1",
+      "text": "You felt productive today — what made it feel that way?",
+      "options": [
+        { "label": "I learned a new skill or grew in an area I was working on", "next": "A1_Q3", "signal": "axis1:internal" },
+        { "label": "I completed what the client needed and dealt with it fantastically", "next": "A1_Q3", "signal": "axis1:internal" },
+        { "label": "I didn't repeat past mistakes and performed much better than before", "next": "A1_Q3", "signal": "axis1:internal" },
+        { "label": "I received recognition — like a promotion or strong praise", "next": "A1_Q3", "signal": "axis1:external" }
+      ]
+    },
+
+    {
+      "id": "A1_Q2_SMOOTH",
+      "type": "question",
+      "axis": "axis1",
+      "text": "You described today as smooth and satisfying — what contributed to that?",
+      "options": [
+        { "label": "My managers and seniors were impressed and had no complaints", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "I didn't face any major problems — work flowed without friction", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "Things gradually went well even though the start was a bit difficult", "next": "A1_Q3", "signal": "axis1:internal" },
+        { "label": "An issue that had been stuck for a long time finally got resolved", "next": "A1_Q3", "signal": "axis1:internal" }
+      ]
+    },
+
+    {
+      "id": "A1_Q2_TOUGH",
+      "type": "question",
+      "axis": "axis1",
+      "text": "Today was tough and frustrating — what was at the heart of it?",
+      "options": [
+        { "label": "I got scolded or received harsh feedback", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "I couldn't solve an issue that needed solving", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "Personal problems were weighing on my mind and affecting my focus", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "I had to do overtime and the day just felt draining overall", "next": "A1_Q3", "signal": "axis1:external" }
+      ]
+    },
+
+    {
+      "id": "A1_Q2_MIXED",
+      "type": "question",
+      "axis": "axis1",
+      "text": "Mixed days are interesting — what made today feel that way?",
+      "options": [
+        { "label": "Work went well but something on my mind kept pulling me down", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "The start was good but things got harder as the day went on", "next": "A1_Q3", "signal": "axis1:external" },
+        { "label": "Something good and something bad happened — hard to weigh them", "next": "A1_Q3", "signal": "axis1:internal" },
+        { "label": "Work was tough but my senior handled it with patience — that helped", "next": "A1_Q3", "signal": "axis1:internal" }
+      ]
+    },
+
+    {
+      "id": "A1_Q3",
+      "type": "question",
+      "axis": "axis1",
+      "text": "Whatever happened today — what guided your actions in that situation?",
+      "options": [
+        { "label": "I focused on what I could control", "next": "A1_Q4", "signal": "axis1:internal" },
+        { "label": "I adapted and found another way", "next": "A1_Q4", "signal": "axis1:internal" },
+        { "label": "I relied on the plan or others around me", "next": "A1_Q4", "signal": "axis1:external" },
+        { "label": "I felt unsure and didn't take much action", "next": "A1_Q4", "signal": "axis1:external" },
+        { "label": "Things mostly worked out on their own", "next": "A1_Q4", "signal": "axis1:external" }
+      ]
+    },
+
+    {
+      "id": "A1_Q4",
+      "type": "question",
+      "axis": "axis1",
+      "text": "Thinking about today as a whole — how do you feel about the role you played in how it went?",
+      "options": [
+        { "label": "I gave it my best given the circumstances", "next": "A1_DECISION", "signal": "axis1:internal" },
+        { "label": "I could have done more but didn't", "next": "A1_DECISION", "signal": "axis1:internal" },
+        { "label": "It was hard to do much — the situation was working against me", "next": "A1_DECISION", "signal": "axis1:external" },
+        { "label": "I'm not sure I had much impact either way", "next": "A1_DECISION", "signal": "axis1:external" }
+      ]
+    },
+
+    {
+      "id": "A1_DECISION",
+      "type": "decision",
+      "axis": "axis1",
+      "note": "Counts axis1 signals across all previous answers. Routes to internal or external reflection.",
+      "conditions": [
+        { "if": "axis1.internal > axis1.external", "next": "A1_REFLECTION_INTERNAL" },
+        { "if": "axis1.external >= axis1.internal", "next": "A1_REFLECTION_EXTERNAL" }
+      ]
+    },
+
+    {
+      "id": "A1_REFLECTION_INTERNAL",
+      "type": "reflection",
+      "axis": "axis1",
+      "text": "You stayed engaged with what you could influence today. Even when things weren't perfect, you kept your focus on your own role in how things unfolded — and that's not a small thing. Most people look outward first.",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "A1_REFLECTION_EXTERNAL",
+      "type": "reflection",
+      "axis": "axis1",
+      "text": "A lot today felt shaped by what was happening around you — people, situations, things outside your hands. That's real. But somewhere in there, you still made calls. Small ones, maybe. What were they?",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "BRIDGE_1_2",
+      "type": "bridge",
+      "text": "Now let's shift from how you handled your day — to how you showed up for others in it.",
+      "next": "A2_Q1"
+    },
+
+    {
+      "id": "A2_Q1",
+      "type": "question",
+      "axis": "axis2",
+      "text": "Think of a moment today where you had to put in effort. What mattered most to you in that moment?",
+      "options": [
+        { "label": "That the work moves forward, no matter who gets credit for it", "next": "A2_Q2", "signal": "axis2:contribution" },
+        { "label": "That I do my part properly and with care", "next": "A2_Q2", "signal": "axis2:contribution" },
+        { "label": "That my effort is noticed by the right people", "next": "A2_Q2", "signal": "axis2:entitlement" },
+        { "label": "That things feel fair — that others are pulling their weight too", "next": "A2_Q2", "signal": "axis2:entitlement" }
+      ]
+    },
+
+    {
+      "id": "A2_Q2",
+      "type": "question",
+      "axis": "axis2",
+      "text": "Looking back at that same moment — how do you feel about how you showed up?",
+      "options": [
+        { "label": "I'm glad I stayed focused on getting things done", "next": "A2_Q3", "signal": "axis2:contribution" },
+        { "label": "I did what was expected of me — no more, no less", "next": "A2_Q3", "signal": "axis2:contribution" },
+        { "label": "I feel like the effort I put in deserved more recognition", "next": "A2_Q3", "signal": "axis2:entitlement" },
+        { "label": "I still feel that others should have done more", "next": "A2_Q3", "signal": "axis2:entitlement" }
+      ]
+    },
+
+    {
+      "id": "A2_Q3",
+      "type": "question",
+      "axis": "axis2",
+      "text": "Was there a moment today where you could have helped someone — but didn't?",
+      "options": [
+        { "label": "No — I helped wherever I saw the need", "next": "A2_DECISION", "signal": "axis2:contribution" },
+        { "label": "Yes — I was too focused on my own work to stop", "next": "A2_DECISION", "signal": "axis2:entitlement" },
+        { "label": "Yes — I felt it wasn't really my responsibility", "next": "A2_DECISION", "signal": "axis2:entitlement" },
+        { "label": "I wasn't sure if my help would actually be welcome", "next": "A2_DECISION", "signal": "axis2:contribution" }
+      ]
+    },
+
+    {
+      "id": "A2_DECISION",
+      "type": "decision",
+      "axis": "axis2",
+      "note": "Counts axis2 signals across all previous answers. Routes to contribution or entitlement reflection.",
+      "conditions": [
+        { "if": "axis2.contribution > axis2.entitlement", "next": "A2_REFLECTION_CONTRIBUTION" },
+        { "if": "axis2.entitlement >= axis2.contribution", "next": "A2_REFLECTION_ENTITLEMENT" }
+      ]
+    },
+
+    {
+      "id": "A2_REFLECTION_CONTRIBUTION",
+      "type": "reflection",
+      "axis": "axis2",
+      "text": "You leaned toward contributing today — keeping your focus on the work and on moving things forward. That kind of effort often goes unnoticed in the moment. But it's exactly the kind that builds real trust over time.",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "A2_REFLECTION_ENTITLEMENT",
+      "type": "reflection",
+      "axis": "axis2",
+      "text": "Part of your attention today was on what you were getting back — recognition, fairness, credit. That's a very human place to be. The question worth sitting with: was there anything you could still have given, even then?",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "BRIDGE_2_3",
+      "type": "bridge",
+      "text": "One last shift. Beyond how you worked and how you contributed — who was today really about, for you?",
+      "next": "A3_Q1"
+    },
+
+    {
+      "id": "A3_Q1",
+      "type": "question",
+      "axis": "axis3",
+      "text": "When you think about the most important moment of your day — who comes to mind first?",
+      "options": [
+        { "label": "Just me and my own work", "next": "A3_Q2", "signal": "axis3:self" },
+        { "label": "My team and our shared responsibilities", "next": "A3_Q2", "signal": "axis3:others" },
+        { "label": "The customers or end users we are serving", "next": "A3_Q2", "signal": "axis3:others" },
+        { "label": "A specific person I interacted with today", "next": "A3_Q2", "signal": "axis3:others" }
+      ]
+    },
+
+    {
+      "id": "A3_Q2",
+      "type": "question",
+      "axis": "axis3",
+      "text": "In that moment — what shaped your reaction the most?",
+      "options": [
+        { "label": "My own pressure and workload", "next": "A3_Q3", "signal": "axis3:self" },
+        { "label": "The team's situation and what they were going through", "next": "A3_Q3", "signal": "axis3:others" },
+        { "label": "Someone else's difficulty that I became aware of", "next": "A3_Q3", "signal": "axis3:others" },
+        { "label": "The larger goal we were all working towards", "next": "A3_Q3", "signal": "axis3:others" }
+      ]
+    },
+
+    {
+      "id": "A3_Q3",
+      "type": "question",
+      "axis": "axis3",
+      "text": "Did you check in on anyone today — even briefly?",
+      "options": [
+        { "label": "Yes — I noticed someone struggling and reached out first", "next": "A3_DECISION", "signal": "axis3:others" },
+        { "label": "Yes — but only because they came to me first", "next": "A3_DECISION", "signal": "axis3:self" },
+        { "label": "No — I was too caught up in my own work", "next": "A3_DECISION", "signal": "axis3:self" },
+        { "label": "No — everyone around me seemed okay", "next": "A3_DECISION", "signal": "axis3:self" }
+      ]
+    },
+
+    {
+      "id": "A3_DECISION",
+      "type": "decision",
+      "axis": "axis3",
+      "note": "Counts axis3 signals across all previous answers. Routes to others or self reflection.",
+      "conditions": [
+        { "if": "axis3.others > axis3.self", "next": "A3_REFLECTION_OTHERS" },
+        { "if": "axis3.self >= axis3.others", "next": "A3_REFLECTION_SELF" }
+      ]
+    },
+
+    {
+      "id": "A3_REFLECTION_OTHERS",
+      "type": "reflection",
+      "axis": "axis3",
+      "text": "Today your attention reached beyond yourself — toward your team, a specific person, or the people your work ultimately serves. That wider perspective is where most meaningful work actually lives.",
+      "next": "A3_CLOSING"
+    },
+
+    {
+      "id": "A3_REFLECTION_SELF",
+      "type": "reflection",
+      "axis": "axis3",
+      "text": "Today felt centered on your own pressures and responsibilities. That's not a flaw — sometimes that's exactly where focus needs to be. But it's worth asking: was there someone nearby who might have needed a moment of your attention?",
+      "next": "A3_CLOSING"
+    },
+
+    {
+      "id": "A3_CLOSING",
+      "type": "reflection",
+      "text": "Awareness of where your attention naturally goes is the first step to choosing where to direct it tomorrow.",
+      "next": "SUMMARY"
+    },
+
+    {
+      "id": "SUMMARY",
+      "type": "summary",
+      "dominantLabels": {
+        "axis1": {
+          "internal": "taking ownership of how things went",
+          "external": "feeling shaped by circumstances around you"
+        },
+        "axis2": {
+          "contribution": "focusing on what you could give",
+          "entitlement": "noticing what you were expecting back"
+        },
+        "axis3": {
+          "others": "thinking beyond yourself",
+          "self": "staying focused on your own responsibilities"
+        }
+      },
+      "text": "Today you leaned toward {axis1.dominant} in how you handled situations, {axis2.dominant} in how you approached your effort, and {axis3.dominant} in where your attention was focused. You described your day as '{A1_Q1.answer}'. That's one data point. Tomorrow is another.",
+      "next": "END"
+    },
+
+    {
+      "id": "END",
+      "type": "end",
+      "text": "That's it for today. Reflection is how ordinary days become useful ones. See you tomorrow."
+    }
+
+  ]
+}
